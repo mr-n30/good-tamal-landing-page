@@ -5,88 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, intital-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
+
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <!-- BOOTSTRAP -->
   </head>
-  <body>
+  <body class="bg-dark">
+    <!-- REACT -->
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+    <!-- REACT -->
 
-    <!-- HEADER -->
-    <header id="header">
-
-      <!-- NAV -->
-      <nav id="nav-bar">
-	<ul class="nav-ul">
-	  <li id="header-img-li"><a id="logo" href="#home"><p id="logo-text">Good Tamal</p><img loading="lazy" id="header-img" alt="Good Tamal" src="https://82940c743faebd0e4608.cdn6.editmysite.com/uploads/b/82940c743faebd0e4608c0db591273ea4b73003eb63321f283c2d000d7eac7ef/mina%20eb_1607232687.jpg?width=2400&optimize=medium"></a></li>
-	  <li class="nav-list"><a class="nav-link" href="#home">Home</a></li>
-	  <li class="nav-list"><a class="nav-link" href="#email">Order</a></li>
-	  <li class="nav-list"><a class="nav-link" href="#gallery">Gallery</a></li>
-	  <li class="nav-list"><a class="nav-link" href="#contact">Contact</a></li>
-	</ul>
-      </nav>
-
-      <!-- INTRO MESSAGE -->
-      <div id="home" class="intro">
-	<h1 id="ignore-style" class="ignore-style">Welcome to, <span class="intro-welcome-message">Good Tamal!</span></h1>
-	<img id="intro-img" src="https://82940c743faebd0e4608.cdn6.editmysite.com/uploads/b/82940c743faebd0e4608c0db591273ea4b73003eb63321f283c2d000d7eac7ef/mina%20eb_1607232687.jpg?width=2400&optimize=medium" alt="Images of Tamales on a plate" loading="lazy">
-      </div>
-    </header>
-
-    <!-- MAIN -->
-    <main>
-
-      <!-- GALLERY - TAMALES PRODUCT VIDEO -->
-      <div id="gallery">
-	<h1>Gallery</h1>
-	<iframe id="video" src="https://www.youtube.com/embed/-ls7957fga8?si=fXUJnVDwXyJ8cAlu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-	<div class="gallery-grid-container">
-	  <img src="https://deliastamales.com/wp-content/uploads/2017/03/delias-best-tamales-texas.jpg" alt="Images of Tamales on a plate" loading="lazy">
-	  <img src="https://media.nbcchicago.com/2021/12/web-delicious-tamales-food-guy-12-16.jpg?quality=85&strip=all&resize=3400%2C675" alt="Images of Tamales on a plate" loading="lazy">
-	  <img src="https://82940c743faebd0e4608.cdn6.editmysite.com/uploads/b/82940c743faebd0e4608c0db591273ea4b73003eb63321f283c2d000d7eac7ef/mina%20eb_1607232687.jpg?width=2400&optimize=medium" alt="Images of Tamales on a plate" loading="lazy">
-	</div>
-      </div>
-
-      <!-- PRICING/ORDER/QUANTITY -->
-      <div id="price-div-root">
-	<h1>Pricing</h1>
-	<div id="price-div">
-	  <article>
-	    <h1>Half-Dozen</h1>
-	    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p><span class="price">$7</span></p>
-	  </article>
-
-	  <article>
-	    <h1>One Dozen</h1>
-	    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p><span class="price">$14</span></p>
-	  </article>
-
-	  <article>
-	    <h1>Custom Order</h1>
-	    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p><p><span class="price"><a href="#contact">Contact</a></span></p>
-	  </article>
-	</div>
-      </div>
-
-      <!-- USEr SIGNUP FORM -->
-      <div id="form-div">
-	<form id="form" action="https://www.freecodecamp.com/email-submit" method="post">
-	  <fieldset>
-	    <legend>Enter your email to get started with your order</legend>
-	    <a href="#form"><p>Good Tamal</p><img loading="lazy" alt="Good Tamal" src="https://82940c743faebd0e4608.cdn6.editmysite.com/uploads/b/82940c743faebd0e4608c0db591273ea4b73003eb63321f283c2d000d7eac7ef/mina%20eb_1607232687.jpg?width=2400&optimize=medium"></a>
-	    <input name="email" type="email" placeholder="example@example.com" id="email" required>
-	    <input type="submit" value="Submit" id="submit">
-	  </fieldset>
-	</form>
-      </div>
-    </main>
-
-    <!-- CONTACT INFO -->
-    <div id="contact">
-      <footer>
-	<ul>
-	  <li>Email us at: goodtamal@example.com</li>
-	  <li>Subscribe to us on YouTube: @youtube</li>
-	  <li>&copy; goodtamal</li>
-	</ul>
-      </footer>
-    </div>
-
+    <!-- BOOTSTRAP -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <!-- BOOTSTRAP -->
   </body>
 </html>
