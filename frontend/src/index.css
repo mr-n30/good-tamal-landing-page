@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+* {
+    @apply m-0 p-0 box-border border-green-500 border-dotted;
+}
+
+html, body {
+    @apply
+    h-full w-full
+    flex flex-col justify-center items-center;
+} 
+
+#root {
+    @apply
+    h-full w-full;
+}
+
+/* Introduction Section */
+.introduction {
+    @apply
+    border-black border-2
+    flex flex-col justify-center items-center
+    bg-[url('https://images.unsplash.com/photo-1732118070605-8c5faa62d284?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVzaCUyMHRhbWFsZXN8ZW58MXx8fHwxNzY0NDc1NjEwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')]
+    bg-center bg-no-repeat bg-cover
+    text-white
+    min-h-screen w-full;
+}
+
+.introduction h1 {
+    @apply text-7xl font-bold text-center mb-6;
+}
+
+.introduction p {
+    @apply
+    text-2xl text-center mb-12;
+}
+
+.introduction-link-group {
+    @apply
+    border-black border-2
+    w-md
+    flex justify-center items-center gap-3;
+}
+
+.introduction-link {
+    @apply
+    border-2 rounded-lg border-black p-5
+    font-bold text-lg;
+}
+
+.introduction-link:first-child {
+    @apply bg-red-500 hover:bg-red-700 transition-colors;
+}
+
+.introduction-link:last-child {
+    @apply bg-gray-500/70 transition-colors hover:bg-gray-400/50;
+}
+
+/* Signature Dishes Section */
+.signature-dishes {
+    @apply
+    flex flex-col justify-center items-center;
+}
+
+.dish-list {
+    @apply
+    grid grid-cols-3 gap-4;
+}
+
+.dish {
+    @apply
+    border-2 border-black rounded-lg
+    w-sm h-120;
+}
