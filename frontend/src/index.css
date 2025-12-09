@@ -1,7 +1,6 @@
 @import "tailwindcss";
-
 * {
-    @apply m-0 p-0 box-border border-green-500 border-dotted;
+    @apply m-0 p-0 box-border border-green-500 border-dotted border-2
 }
 
 html, body {
@@ -15,15 +14,41 @@ html, body {
     h-full w-full;
 }
 
+/* TMP */
+.tmp-color {
+    @apply border-white/70   border-solid;
+}
+
 /* Introduction Section */
 .introduction {
     @apply
     border-black border-2
     flex flex-col justify-center items-center
-    bg-[url('https://images.unsplash.com/photo-1732118070605-8c5faa62d284?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVzaCUyMHRhbWFsZXN8ZW58MXx8fHwxNzY0NDc1NjEwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')]
-    bg-center bg-no-repeat bg-cover
+    /* bg-[url('https://images.unsplash.com/photo-1732118070605-8c5faa62d284?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVzaCUyMHRhbWFsZXN8ZW58MXx8fHwxNzY0NDc1NjEwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral')]
+    bg-center bg-no-repeat bg-cover */
     text-white
     min-h-screen w-full;
+}
+
+.introduction-image {
+    @apply
+    object-cover
+    w-full
+    h-full
+    absolute
+    z-[-2];
+}
+
+.introduction-image-overlay {
+    @apply
+    absolute
+    z-[-1]
+    h-full
+    w-full
+    bg-linear-to-b
+    from-black/90
+    via-black/40
+    to-black/11;
 }
 
 .introduction h1 {
@@ -69,6 +94,217 @@ html, body {
 
 .dish {
     @apply
-    border-2 border-black rounded-lg
-    w-sm h-120;
+    border-2 border-black rounded-3xl
+    w-sm h-120
+    flex flex-col justify-evenly items-center;
+}
+
+.dish p {
+    @apply text-center;
+}
+
+.dish-heading-group {
+    @apply
+    flex justify-between w-full;
+}
+
+.dish button {
+    @apply
+    border-2 rounded-lg border-black
+    p-5 font-bold text-lg bg-red-500
+    hover:bg-red-700 transition-colors
+    text-white
+    w-full;
+}
+
+.dish-image img {
+}
+
+/* Our story section */
+.our-story {
+    @apply
+    h-[40rem]
+    flex
+    justify-center
+    items-start
+    gap-10
+}
+
+.our-story-text {
+    @apply
+    max-w-lg
+    text-lg
+}
+
+.our-story-text h1 {
+    @apply
+    text-4xl
+    font-bold
+}
+
+.our-story img {
+    @apply
+    max-w-lg;
+}
+
+.our-story-decoration-container {
+   @apply
+   h-[4rem] 
+   flex
+   flex-col
+   justify-center
+   items-start
+}
+.our-story-decoration {
+    @apply
+    border-2
+    border-black
+    bg-red-300
+    rounded-full
+    p-2
+    pl-4
+    pr-4
+}
+
+/* Review Section */
+.reviews {
+    @apply
+    flex
+    justify-around
+    items-center
+    pb-30
+}
+
+.review {
+    @apply
+    border-2
+    shadow-2xl
+    w-md
+    h-75
+    grid
+    grid-cols-2
+    content-center
+    gap-y-4
+    gap-x-10;
+}
+
+.user-review {
+    @apply
+    col-start-1
+    col-span-2
+    text-center;
+}
+
+.user-name {
+    @apply
+    justify-self-start;
+}
+
+.user-profile-photo {
+    @apply
+    justify-self-center;
+}
+
+.review-section {
+    @apply
+    grid
+    grid-rows-2
+}
+
+.review-section-heading {
+    @apply
+    text-center
+    flex flex-col justify-center items-center;
+}
+
+.review-section-heading h1 {
+    @apply
+    text-5xl
+}
+
+.review-section-heading p {
+    @apply
+    text-lg;
+}
+
+/* Location Section */
+.location {
+    @apply
+    grid
+    grid-cols-2
+}
+
+.location-heading {
+    @apply
+    col-span-full
+    text-center
+}
+
+/* Footer Section */
+footer {
+    @apply
+    grid
+    grid-cols-4
+    h-[50%]
+    pt-30
+}
+
+.copyright {
+    @apply
+    col-span-full
+    text-center
+    p-5
+}
+
+.footer-slogan {
+    @apply
+    flex flex-col justify-start items-center gap-3
+}
+
+.footer-slogan h1 {
+    @apply
+    text-3xl
+    font-bold
+}
+
+.footer-contact-info {
+    @apply
+    text-center
+    flex
+    flex-col
+    justify-center
+    items-center
+}
+
+.quick-links h1 {
+    @apply
+    text-2xl
+    font-bold
+}
+
+.quick-links {
+    @apply
+    flex
+    flex-col
+    justify-start
+}
+
+.footer-contact-info h1 {
+    @apply
+    text-2xl
+    font-bold
+}
+
+.footer-contact-info {
+    @apply
+    flex
+    flex-col
+    justify-start
+    items-start
+}
+
+.subscribe-newsletter h1 {
+    @apply
+    text-2xl
+    font-bold
 }
