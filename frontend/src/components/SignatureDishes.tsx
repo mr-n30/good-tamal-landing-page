@@ -5,16 +5,18 @@ const SignatureDishes = () => {
     const dishes: JSX.Element[] = []
     for (let i = 0; i < 6; i++) {
         dishes.push(
-            <article className="dish">
+            <article key={i} className="dish">
                 <figure className="dish-image">
                     <img src={dishImage} alt="Signature dish demo photo for now. - mr-n30" />
-                    <figcaption>
-                        <h2>Pork Tamal</h2>
-                        <span>$3.50</span>
-                    </figcaption>
                 </figure>
-                <p>Tender pork slow-cooked with red chili sauce, wrapped in fresh corn masa</p>
-                <button>Add to order</button>
+                <div className="dish-info">
+                    <div className="dish-pricing">
+                        <h2>Pork Tamal</h2>
+                        <p>$3.50</p>
+                    </div>
+                    <p>Tender pork slow-cooked with red chili sauce, wrapped in fresh corn masa</p>
+                    <button>Add to order</button>
+                </div>
             </article>
 
         )

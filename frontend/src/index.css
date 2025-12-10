@@ -1,6 +1,6 @@
 @import "tailwindcss";
 * {
-    @apply m-0 p-0 box-border border-green-500 border-dotted border-2
+    @apply m-0 p-0 box-border; /*border-green-500 border-dotted border-2*/
 }
 
 html, body {
@@ -62,7 +62,6 @@ html, body {
 
 .introduction-link-group {
     @apply
-    border-black border-2
     w-md
     flex justify-center items-center gap-3;
 }
@@ -84,7 +83,21 @@ html, body {
 /* Signature Dishes Section */
 .signature-dishes {
     @apply
-    flex flex-col justify-center items-center;
+    flex
+    flex-col
+    justify-center
+    items-center
+    pt-10
+    pb-10
+}
+
+.signature-dishes p {
+    @apply
+    text-lg
+}
+.signature-dishes h1 {
+    @apply
+    text-5xl
 }
 
 .dish-list {
@@ -94,13 +107,10 @@ html, body {
 
 .dish {
     @apply
-    border-2 border-black rounded-3xl
+    rounded-3xl
     w-sm h-120
-    flex flex-col justify-evenly items-center;
-}
-
-.dish p {
-    @apply text-center;
+    flex flex-col justify-evenly
+    shadow-md
 }
 
 .dish-heading-group {
@@ -111,29 +121,68 @@ html, body {
 .dish button {
     @apply
     border-2 rounded-lg border-black
-    p-5 font-bold text-lg bg-red-500
+    p-2 font-bold text-[.90rem] bg-red-500
     hover:bg-red-700 transition-colors
     text-white
-    w-full;
+    w-full
 }
 
 .dish-image img {
+    @apply
+    rounded-t-2xl
+}
+
+.dish-info {
+    @apply
+    ml-5
+    mr-5
+    flex
+    flex-col
+    justify-evenly
+    gap-4
+}
+
+.dish-pricing h2 {
+    @apply
+    text-2xl
+}
+
+.dish-pricing p {
+    @apply
+    text-xl
+}
+
+.dish-pricing {
+    @apply
+    flex
+    justify-between
 }
 
 /* Our story section */
 .our-story {
     @apply
-    h-[40rem]
+    h-[50rem]
     flex
     justify-center
-    items-start
+    items-center
     gap-10
+    text-white
+     from-gray-900 to-gray-950/90 via-gray-950
+    bg-radial-[at_25%_25%]
 }
 
 .our-story-text {
     @apply
     max-w-lg
-    text-lg
+}
+
+.our-story-description {
+    @apply
+    text-xl
+    flex
+    flex-col
+    gap-5
+    items-end
 }
 
 .our-story-text h1 {
@@ -144,7 +193,9 @@ html, body {
 
 .our-story img {
     @apply
-    max-w-lg;
+    max-w-lg
+    rounded-2xl
+    shadow-2xl
 }
 
 .our-story-decoration-container {
@@ -167,17 +218,25 @@ html, body {
 }
 
 /* Review Section */
+.review-section {
+    @apply
+    bg-gradient-to-b
+    from-red-100
+    to-orange-100
+}
 .reviews {
     @apply
     flex
     justify-around
     items-center
     pb-30
+    border-b-gray-500/50
+    border-b-1
 }
 
 .review {
     @apply
-    border-2
+    inset-1
     shadow-2xl
     w-md
     h-75
@@ -185,36 +244,54 @@ html, body {
     grid-cols-2
     content-center
     gap-y-4
-    gap-x-10;
+    gap-x-10
+    p-5
+    rounded-3xl
+    bg-white/90
 }
 
 .user-review {
     @apply
     col-start-1
     col-span-2
-    text-center;
 }
 
 .user-name {
     @apply
-    justify-self-start;
+    justify-self-start
 }
 
 .user-profile-photo {
     @apply
-    justify-self-center;
+    justify-self-start
+    w-[50px]
+    h-[50px]
+}
+
+.photo-username-style {
+    @apply
+    flex
+    items-center
+    justify-start
+    gap-5
+    col-start-1
+    col-span-2
 }
 
 .review-section {
     @apply
     grid
     grid-rows-2
+    h-175
 }
 
 .review-section-heading {
     @apply
     text-center
-    flex flex-col justify-center items-center;
+    flex
+    flex-col
+    justify-center
+    items-center
 }
 
 .review-section-heading h1 {
@@ -224,7 +301,7 @@ html, body {
 
 .review-section-heading p {
     @apply
-    text-lg;
+    text-lg
 }
 
 /* Location Section */
@@ -232,12 +309,77 @@ html, body {
     @apply
     grid
     grid-cols-2
+    p-20
+    gap-y-10
+}
+
+.location-address-and-hours {
+    @apply
+    flex
+    flex-col
+    gap-5
+    justify-start
+    items-start
 }
 
 .location-heading {
     @apply
     col-span-full
     text-center
+}
+
+.location-heading h1 {
+    @apply
+    text-5xl
+    font-bold
+    pb-4.5
+}
+
+.location-day-hour {
+    @apply
+    flex
+    justify-start
+    items-center
+    gap-10
+}
+
+.hours {
+    @apply
+    w-full
+}
+
+.day-hour-aligner {
+    @apply
+    w-xs
+}
+
+.styles-for-location-and-hours {
+    @apply
+    w-2xl
+    p-5
+    bg-linear-to-r
+    from-orange-100
+    to-red-200
+    shadow-lg
+    rounded-xl
+}
+
+.map {
+    @apply
+    w-2xl
+    rounded-xl
+    flex
+    flex-col
+    justify-center
+    items-center
+    shadow-2xl
+}
+
+.map iframe {
+    @apply
+    w-full
+    h-80
+    rounded-xl
 }
 
 /* Footer Section */
@@ -247,6 +389,14 @@ footer {
     grid-cols-4
     h-[50%]
     pt-30
+    border-t-1
+    bg-linear-to-t
+    from-black/90
+    to-gray-900
+    text-white
+    text-lg
+    pl-10
+    pr-10
 }
 
 .copyright {
@@ -258,13 +408,18 @@ footer {
 
 .footer-slogan {
     @apply
-    flex flex-col justify-start items-center gap-3
+    flex flex-col justify-start items-start gap-3
 }
 
 .footer-slogan h1 {
     @apply
     text-3xl
     font-bold
+}
+
+.footer-slogan p {
+    @apply
+    w-xs
 }
 
 .footer-contact-info {

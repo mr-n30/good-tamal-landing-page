@@ -9,19 +9,19 @@ const reviews: Review[] = [
     {
         review: "These are the most authentic tamales I've had outside of Mexico! The pork tamal reminds me of my childhood. Absolutely delicious!",
         name: "Maria Rodriguez",
-        profilePhoto: "x",
+        profilePhoto: "https://github.com/favicon.ico",
         alt: "Maria profile photo"
     },
     {
         review: "I'm obsessed with the mole tamal! The perfect blend of sweet and savory. The family who runs this place puts so much love into their food.",
         name: "James Chen",
-        profilePhoto: "x",
+        profilePhoto: "https://github.com/favicon.ico",
         alt: "James profile photo"
     },
     {
         review: "Fresh, handmade, and bursting with flavor. The vegetarian tamal is incredible! This is now my weekly tradition.",
         name: "Sofia Martinez",
-        profilePhoto: "x",
+        profilePhoto: "https://github.com/favicon.ico",
         alt: "Sofia profile photo"
     }
 ]
@@ -37,10 +37,12 @@ const Reviews = () => {
                 {
                     reviews.map((elem: Review, index: number) => {
                         return (
-                            <article className='review'>
-                                <span className="user-review">"{elem.review}"</span>
-                                <img className="user-profile-photo" src={elem.profilePhoto} alt={elem.alt} />
-                                <p className="user-name">{elem.name}</p>
+                            <article key={"review-" + index} className='review'>
+                                <p className="user-review">"{elem.review}"</p>
+                                <div className="photo-username-style">
+                                    <img className="user-profile-photo" src={elem.profilePhoto} alt={elem.alt} />
+                                    <p className="user-name">{elem.name}</p>
+                                </div>
                             </article>
                         )
                     })

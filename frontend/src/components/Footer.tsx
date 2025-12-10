@@ -1,5 +1,12 @@
+// import { useState } from 'react'
+
 export default function Footer() {
     const currentYear = new Date().getFullYear()
+
+    const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        alert('Form submitted')
+    }
 
     return (
         <footer>
@@ -28,11 +35,11 @@ export default function Footer() {
             <div className="subscribe-newsletter">
                 <h1>Stay Connected</h1>
                 <p>Subscribe for special offers and updates</p>
-                <form>
+                <form onSubmit={(e) => handleFormSubmit(e)} className="footer-subscribe-email-form">
                     <input type="email" placeholder="Your email" />
-                    <button type="submit"><i className="icon"></i></button>
+                    <button type="submit">submit<i className="icon"></i></button>
                 </form>
-                <div className="social-media-icons">
+                <div className="footer-social-media-icons">
                     <i>Instagram</i>
                     <i>Threads</i>
                     <i>TikTok</i>
