@@ -1,10 +1,17 @@
 // import { useState } from 'react'
+import threadsIcon from '../assets/icons/threads.png'
+import instagramIcon from '../assets/icons/ig.png'
+import tiktokIcon from '../assets/icons/tiktok.png'
 
 export default function Footer() {
     const currentYear = new Date().getFullYear()
 
     const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        // TODO: Implement form submission logic
+        // This will be submitted to a backend later
+        // where the admin or employee can view the emails / orders collected
+        // For now we open a modal or alert
         alert('Form submitted')
     }
 
@@ -35,14 +42,15 @@ export default function Footer() {
             <div className="subscribe-newsletter">
                 <h1>Stay Connected</h1>
                 <p>Subscribe for special offers and updates</p>
-                <form onSubmit={(e) => handleFormSubmit(e)} className="footer-subscribe-email-form">
+                <form onSubmit={(e) => handleFormSubmit(e)}
+                    className="footer-subscribe-email-form">
                     <input type="email" placeholder="Your email" />
                     <button type="submit">submit<i className="icon"></i></button>
                 </form>
                 <div className="footer-social-media-icons">
-                    <i>Instagram</i>
-                    <i>Threads</i>
-                    <i>TikTok</i>
+                    <img src={instagramIcon} className="footer-ig-icon" alt="Instagram" />
+                    <img src={threadsIcon} className="footer-threads-icon" alt="Threads" />
+                    <img src={tiktokIcon} className="footer-tiktok-icon" alt="TikTok" />
                 </div>
             </div>
 

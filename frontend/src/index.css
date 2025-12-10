@@ -444,6 +444,49 @@ footer {
     justify-start
 }
 
+.footer-subscribe-email-form {
+    @apply
+    flex
+    justify-start
+    items-center
+    gap-5
+}
+
+.footer-subscribe-email-form input {
+    @apply
+    outline-1
+    rounded-md
+    p-2
+    bg-white/90
+    text-black
+}
+
+.footer-social-media-icons {
+    @apply
+    flex
+    justify-start
+    items-center
+    gap-5
+}
+
+.footer-ig-icon,
+.footer-threads-icon,
+.footer-tiktok-icon {
+    @apply
+    mt-2
+    rounded-full
+    w-8
+    h-8
+}
+
+.footer-subscribe-email-form button {
+    @apply
+    outline-1
+    p-2
+    rounded-lg
+    capitalize
+}
+
 .footer-contact-info h1 {
     @apply
     text-2xl
@@ -454,6 +497,15 @@ footer {
     @apply
     flex
     flex-col
+    justify-start
+    items-start
+}
+
+.subscribe-newsletter {
+    @apply
+    flex
+    flex-col
+    gap-2
     justify-start
     items-start
 }
