@@ -50,6 +50,11 @@ router.post("/register", async (req: Request, res: Response) => {
             return res.status(400).send({ message: "missing required params!" })
         }
 
+        // TODO:
+        // check if user already exists
+        // and hash password
+        // and validate email format
+        // and validate password strength
         const createdUser = await User.create(user)
 
         return res.status(200).send(createdUser)
