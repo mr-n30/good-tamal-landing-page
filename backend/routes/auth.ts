@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express'
 import User from '../models/User'
 
 const router = Router()
+const validator = require('email-validator')
 
 interface RegisterRequestBody {
     email: string
@@ -46,14 +47,21 @@ router.post("/register", async (req: Request, res: Response) => {
     try {
         const user: RegisterRequestBody = req.body
 
+        if (!validator.validate(user.email)) {
+            return res.status(400).send({message: "Invalid email format!"})
+        }
+
         if (!user.email || !user.password) {
             return res.status(400).send({ message: "missing required params!" })
         }
 
+        const userExists = await User.findOne({ email: user.email })
+        if (userExists) {
+            return res.status(400).send({ message: "User already exists!" })
+        }
+
         // TODO:
-        // check if user already exists
         // and hash password
-        // and validate email format
         // and validate password strength
         const createdUser = await User.create(user)
 
@@ -61,7 +69,7 @@ router.post("/register", async (req: Request, res: Response) => {
     }
 
     catch (e: any) {
-        return res.status(500).send({ "message": "Internal server error" })
+        return res.status(500).send({ "message": e.message })
     }
 })
 
