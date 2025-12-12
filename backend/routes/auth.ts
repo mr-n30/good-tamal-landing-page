@@ -1,8 +1,11 @@
 import { Router, Request, Response } from 'express'
 import User from '../models/User'
+import bcrypt from 'bcrypt'
+import validator from 'email-validator'
+import zxcvbn from 'zxcvbn'
+import generateTokens from "../util/auth"
 
 const router = Router()
-const validator = require('email-validator')
 
 interface RegisterRequestBody {
     email: string
@@ -25,17 +28,28 @@ router.post("/login", async (req: Request, res: Response) => {
             return res.status(400).send({ "message": "missing required params!" })
         }
 
+        // Find user by email
         const user = await User.findOne({ email })
-
         if (!user) {
             return res.status(404).send({ "message": "user not found!" })
         }
 
-        if (user.password !== password) {
-            return res.status(401).send( { message: "Invalid username or password!" })
+        // Check password
+        const valid = await bcrypt.compare(password, user.password)
+        if (!valid) {
+            return res.status(401).send({message: "Invalid username or password!"})
         }
 
-        return res.status(200).send(user)
+        const {accessToken, refreshToken} = generateTokens(user._id.toString())
+
+        res.cookie('refresh_token', refreshToken, {
+            maxAge: 7 * 24 * 60 * 60 * 1000,
+            sameSite: "strict",
+            secure: false,
+            httpOnly: true
+        })
+
+        return res.status(200).send({accessToken, user: {id: user._id, email: user.email}})
     }
 
     catch (e: any) {
@@ -47,22 +61,28 @@ router.post("/register", async (req: Request, res: Response) => {
     try {
         const user: RegisterRequestBody = req.body
 
-        if (!validator.validate(user.email)) {
-            return res.status(400).send({message: "Invalid email format!"})
-        }
-
         if (!user.email || !user.password) {
             return res.status(400).send({ message: "missing required params!" })
         }
 
+        // Validate email format
+        if (!validator.validate(user.email)) {
+            return res.status(400).send({message: "Invalid email format!"})
+        }
+
+        // Check if user already exists
         const userExists = await User.findOne({ email: user.email })
         if (userExists) {
             return res.status(400).send({ message: "User already exists!" })
         }
 
+        // Validate password strength
+        if (zxcvbn(user.password).score < 3) {
+            return res.status(400).send({message: "Password is not strong enough!"})
+        }
+
         // TODO:
         // and hash password
-        // and validate password strength
         const createdUser = await User.create(user)
 
         return res.status(200).send(createdUser)
