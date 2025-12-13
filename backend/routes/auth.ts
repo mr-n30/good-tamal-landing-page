@@ -81,8 +81,6 @@ router.post("/register", async (req: Request, res: Response) => {
             return res.status(400).send({message: "Password is not strong enough!"})
         }
 
-        // TODO:
-        // and hash password
         const createdUser = await User.create(user)
 
         return res.status(200).send(createdUser)
@@ -103,5 +101,10 @@ router.get("/users", async (req: Request, res: Response) => {
         return res.status(500).send({ "message": e.message })
     }
 })
+
+router.get("/test", (req: Request, res: Response) => {
+    res.status(200).send("OK");
+});
+
 
 export default router

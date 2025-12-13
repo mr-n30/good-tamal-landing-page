@@ -6,6 +6,7 @@ import auth from "./routes/auth"
 dotenv.config()
 
 const app = express()
+
 app.use(express.json())
 
 app.use("/api/auth", auth)
