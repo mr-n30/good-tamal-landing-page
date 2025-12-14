@@ -1,3 +1,4 @@
+// A model for customer orders
 import { Schema, model, Document } from 'mongoose'
 
 interface address {
