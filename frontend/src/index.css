@@ -130,6 +130,17 @@ html, body {
 .dish-image img {
     @apply
     rounded-t-2xl
+    object-cover
+    h-70
+    w-full
+    shadow-md
+}
+
+.dish-image {
+    @apply
+    w-full
+    h-75
+
 }
 
 .dish-info {

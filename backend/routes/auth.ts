@@ -102,9 +102,4 @@ router.get("/users", async (req: Request, res: Response) => {
     }
 })
 
-router.get("/test", (req: Request, res: Response) => {
-    res.status(200).send("OK");
-});
-
-
 export default router
