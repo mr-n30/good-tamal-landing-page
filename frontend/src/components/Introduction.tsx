@@ -1,7 +1,8 @@
-import IntroductionLinkGroup from "./IntroductionLinkGroup.tsx"
+import IntroductionLinkGroup from "./IntroductionLinkGroup"
 
 const Introduction = () => {
     const imgURL: string = "https://images.unsplash.com/photo-1732118070605-8c5faa62d284?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmcmVzaCUyMHRhbWFsZXN8ZW58MXx8fHwxNzY0NDc1NjEwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+
     return (
         <section className="introduction">
             <img

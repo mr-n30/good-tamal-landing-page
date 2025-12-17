@@ -16,26 +16,27 @@ interface RegisterRequestBody {
 }
 
 interface LoginRequestBody {
-    email: string
+    username: string
     password: string
 }
 
 router.post("/login", async (req: Request, res: Response) => {
     try {
-        const { email, password }: LoginRequestBody = req.body
+        const { username, password }: LoginRequestBody = req.body
 
-        if (!email || !password) {
+        if (!username || !password) {
             return res.status(400).send({ "message": "missing required params!" })
         }
 
-        // Find user by email
-        const user = await User.findOne({ email })
+        // Find user by usernam
+        const user = await User.findOne({ username })
         if (!user) {
             return res.status(404).send({ "message": "user not found!" })
         }
 
         // Check password
-        const valid = await bcrypt.compare(password, user.password)
+        const valid = await user.comparePassword(password)
+
         if (!valid) {
             return res.status(401).send({message: "Invalid username or password!"})
         }
@@ -49,7 +50,7 @@ router.post("/login", async (req: Request, res: Response) => {
             httpOnly: true
         })
 
-        return res.status(200).send({accessToken, user: {id: user._id, email: user.email}})
+        return res.status(200).send({accessToken, user: {id: user._id, username: user.username}})
     }
 
     catch (e: any) {
@@ -81,7 +82,14 @@ router.post("/register", async (req: Request, res: Response) => {
             return res.status(400).send({message: "Password is not strong enough!"})
         }
 
-        const createdUser = await User.create(user)
+        const createdUser = await User.insertOne({
+            email: user.email,
+            password: user.password,
+            firstName: user.firstName || "",
+            lastName: user.lastName || "",
+            dob: user.dob ? new Date(user.dob) : "",
+            role: "user",
+        })
 
         return res.status(200).send(createdUser)
     }
@@ -91,15 +99,16 @@ router.post("/register", async (req: Request, res: Response) => {
     }
 })
 
-router.get("/users", async (req: Request, res: Response) => {
-    try {
-        const users = await User.find()
-        return res.status(200).send(users)
-    }
+// Future admin route to get all users
+// router.get("/users", async (req: Request, res: Response) => {
+//     try {
+//         const users = await User.find()
+//         return res.status(200).send(users)
+//     }
 
-    catch (e: any) {
-        return res.status(500).send({ "message": e.message })
-    }
-})
+//     catch (e: any) {
+//         return res.status(500).send({ "message": e.message })
+//     }
+// })
 
 export default router

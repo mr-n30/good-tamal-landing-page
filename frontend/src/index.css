@@ -19,6 +19,91 @@ html, body {
     @apply border-white/70   border-solid;
 }
 
+/* Navbar Section */
+nav {
+    @apply
+    w-full
+    h-20
+    fixed
+    top-0
+    left-0
+    right-0
+    bg-black/70
+    text-white
+}
+
+.nav-links {
+    @apply
+    w-full
+    h-full
+    flex
+    justify-end
+    items-center
+    gap-10
+    pr-10
+}
+
+.login-form {
+    @apply
+    bg-linear-to-r/hsl
+    from-gray-900/97
+    to-gray-900/95
+    fixed
+    w-2xl
+    h-150
+    inset-0
+    m-auto
+    flex
+    flex-col
+    justify-center
+    gap-5
+    items-center
+    rounded-2xl
+}
+
+.login-form-close-button {
+    @apply
+    absolute
+    right-5
+    top-4
+}
+
+.login-form-div {
+    @apply
+    flex
+    flex-col
+    justify-center
+    items-center
+    gap-5
+    w-full
+}
+
+.login-form-input {
+    @apply
+    outline-1
+    rounded-sm
+    shadow-md
+    bg-white
+    p-2
+    text-black
+}
+
+.login-form-button-container {
+    @apply
+    w-full
+    flex
+    justify-center
+    items-center
+    gap-5
+}
+
+.login-form-button-container button {
+    @apply
+    outline-1
+    p-2
+    rounded-lg
+}
+
 /* Introduction Section */
 .introduction {
     @apply
@@ -64,6 +149,88 @@ html, body {
     @apply
     w-md
     flex justify-center items-center gap-3;
+}
+
+.instructions-textarea {
+    @apply
+    bg-white/90
+    rounded-lg
+    text-black
+    p-2
+}
+
+.deliver-food-label-element {
+    @apply
+    font-bold
+    text-lg
+    capitalize
+}
+
+.deliver-food-container {
+    @apply
+    w-3xl
+    h-fit
+    p-10
+    rounded-2xl
+    shadow-2xl
+    bg-green-500
+    fixed
+    inset-0
+    m-auto
+    transition-opacity
+    duration-200
+    ease-in-out
+}
+
+.deliver-food-form {
+    @apply
+    flex
+    flex-col
+    h-full
+    w-full
+    justify-center
+    items-center
+    gap-5
+}
+
+.deliver-food-form div {
+    @apply
+    w-full
+    h-fit
+    flex
+    flex-col
+    justify-start
+    items-center
+}
+
+.deliver-food-elem-container {
+    @apply
+    border-2
+    p-5
+    flex
+    flex-col
+    justify-start
+    items-start
+}
+
+.deliver-food-input {
+    @apply
+    rounded-sm
+    shadow-sm
+    w-sm
+    bg-white
+    text-black
+    mt-5
+    p-2
+}
+
+.modal-close-button {
+    @apply
+    absolute
+    right-5
+    top-5
+    text-lg
+    underline
 }
 
 .introduction-link {

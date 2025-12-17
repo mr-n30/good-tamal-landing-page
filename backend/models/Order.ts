@@ -23,7 +23,7 @@ export interface Order extends Document {
     createdAt: Date
     updatedAt: Date
     deliveryTime: Date
-    pickupTime: Date
+    deliveryInstructions?: string
 }
 
 const OrderSchema = new Schema<Order>({
@@ -44,8 +44,8 @@ const OrderSchema = new Schema<Order>({
     },
     createdAt: { type: Date, default: Date.now },
     updatedAt: { type: Date, default: Date.now },
-    deliveryTime: { type: Date, required: false },
-    pickupTime: { type: Date, required: false },
+    deliveryTime: { type: Date, required: false, default: () => new Date(Date.now() + 3600000) }, // default to 1 hour from now
+    deliveryInstructions: { type: String, required: false },
 })
 
 export default model<Order>('Order', OrderSchema)

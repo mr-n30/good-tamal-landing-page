@@ -7,6 +7,7 @@ interface dish {
     price: number
     description: string
     imageUrl: string
+    imageAlt: string
 }
 
 const SignatureDishes = () => {
@@ -32,7 +33,7 @@ const SignatureDishes = () => {
         dishes.push(
             <article key={i} className="dish">
                 <figure className="dish-image">
-                    <img src={item.imageUrl} alt={item.description} />
+                    <img src={item.imageUrl} alt={item.imageAlt} />
                 </figure>
                 <div className="dish-info">
                     <div className="dish-pricing">
@@ -49,7 +50,7 @@ const SignatureDishes = () => {
 
     return (
         <section className="signature-dishes">
-            <h1>Our Signature Tamales</h1>
+            <h1 id="menu">Our Signature Tamales</h1>
             <p>Each tamal is handcrafted with love using authentic recipes and the finest ingredients</p>
             <div className="dish-list">
                 {dishes}

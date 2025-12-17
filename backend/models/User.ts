@@ -2,6 +2,7 @@ import { Schema, model, Document } from 'mongoose'
 import bcrypt from "bcrypt"
 
 export interface IUser extends Document {
+    username: string
     firstName: string
     lastName: string
     email: string
@@ -9,9 +10,12 @@ export interface IUser extends Document {
     dob?: Date
     createdAt: Date
     updatedAt: Date
+    role: "user" | "admin" | "chef" | "employee" | "delivery" | "manager" | "guest"
+    comparePassword(candidatePassword: string): Promise<boolean>
 }
 
 const UserSchema = new Schema<IUser>({
+        username: { type: String, required: true },
         firstName: { type: String, required: true },
         lastName: { type: String, required: true },
         email: { type: String, required: true, unique: true },
@@ -19,6 +23,11 @@ const UserSchema = new Schema<IUser>({
         dob: { type: Date, required: false },
         createdAt: { type: Date, default: Date.now },
         updatedAt: { type: Date, default: Date.now },
+        role: {
+            type: String,
+            enum: ["user", "admin", "chef", "employee", "delivery", "manager", "guest"],
+            default: "user",
+        },
     }
 )
 
@@ -28,5 +37,9 @@ UserSchema.pre<IUser>('save', async function() {
         this.password = await bcrypt.hash(this.password, 10)
     }
 })
+
+UserSchema.methods.comparePassword = async function(candidatePassword: string): Promise<boolean> {
+    return bcrypt.compare(candidatePassword, this.password)
+}
 
 export default model<IUser>('User', UserSchema)
