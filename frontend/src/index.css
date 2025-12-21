@@ -84,6 +84,7 @@ nav {
     rounded-sm
     shadow-md
     bg-white
+    w-xs
     p-2
     text-black
 }
@@ -103,6 +104,43 @@ nav {
     p-2
     rounded-lg
 }
+
+.register-form {
+    @apply
+    absolute
+    z-10
+    outline-1
+    inset-0
+    m-auto
+    bg-black
+    rounded-xl
+}
+
+.login-form-div label {
+    @apply
+    font-bold
+    text-lg
+    text-left
+    w-xs
+}
+
+.login-form-register-container {
+    @apply
+    p-10
+    flex
+    justify-center
+    items-center
+    gap-3
+}
+
+.login-form-register-button {
+    @apply
+    outline-1
+    p-2
+    rounded-lg
+}
+
+/* Register Modal Section */
 
 /* Introduction Section */
 .introduction {

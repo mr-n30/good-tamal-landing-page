@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
+import RegisterModal from './RegisterModal'
 
 export default function LoginModal({ setShowLogin }: { setShowLogin: React.Dispatch<React.SetStateAction<boolean>> }) {
     interface FormInputData {
@@ -7,22 +8,37 @@ export default function LoginModal({ setShowLogin }: { setShowLogin: React.Dispa
         password: string
     }
 
-    interface User {
-        id: string
-        username: string
-    }
-
     interface LoginResponse {
         accessToken?: string
         message?: string
-        user: User
+        user: {
+            id: string
+            username: string
+        }
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
+        const testLogin = async () => {
+            interface TestResponse {
+                message: string
+                user: {
+                    id: string
+                    username: string
+                }
+            }
+
+            const response = await axios.get<TestResponse>('/api/auth/test', {
+                withCredentials: true
+            })
+
+            console.log('Test login response:', response.data)
+
+            return response.data
+        }
 
         try {
-            const res = await axios.post<LoginResponse>('http://localhost:1337/api/auth/login', {
+            const res = await axios.post<LoginResponse>('/api/auth/login', {
                 username: formValue.username,
                 password: formValue.password
             })
@@ -34,9 +50,10 @@ export default function LoginModal({ setShowLogin }: { setShowLogin: React.Dispa
 
             if (res.data.accessToken) {
                 alert('login successful')
+                testLogin()
+                return res.data
             }
 
-            return res.data
         } catch (error) {
             console.error('Login error:', error)
         }
@@ -82,10 +99,8 @@ export default function LoginModal({ setShowLogin }: { setShowLogin: React.Dispa
                 <button type='submit'>Login</button>
                 <button type='button'>Reset Password</button>
             </div>
-            <div className='register-container'>
-                <p>Don't have an account?</p>
-                <button type='button'>Register</button>
-            </div>
+
+            <RegisterModal />
 
             <div className='login-form-close-button'>
                 <button type='button' onClick={() => setShowLogin(false)}>Close</button>
