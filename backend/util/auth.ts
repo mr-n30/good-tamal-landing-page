@@ -1,22 +1,33 @@
-import jwt from 'jsonwebtoken'
-import dotenv from 'dotenv'
+import jwt, { JwtPayload } from 'jsonwebtoken'
+import User from '../models/User'
 
-const generateTokens = (userId: string) => {
-    dotenv.config()
+class JWTHelper {
+    async generateToken(userId: string): Promise<string> {
+        const user = await User.findById(userId)
+        const userRole = user!.user_role
 
-    const accessToken = jwt.sign(
-        {sub: userId},
-        process.env.ACCESS_TOKEN_SECRET!,
-        {expiresIn: "15m"}
-    )
+        const token = jwt.sign(
+            { user_id: userId, user_role: userRole },
+            process.env.REFRESH_TOKEN_SECRET!,
+            // { expiresIn: ''}
+        )
 
-    const refreshToken = jwt.sign(
-        {sub: userId},
-        process.env.REFRESH_TOKEN_SECRET!,
-        {expiresIn: "7d"}
-    )
+        console.log("Generated token:", token)
 
-    return { accessToken, refreshToken }
+        return token
+    }
+
+    async verifyToken(token: string): Promise<JwtPayload | string> {
+        try {
+            const decoded = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET!)
+            return decoded
+        }
+
+        catch (e) {
+            console.error(e)
+            return 'Error verifying token'
+        }
+    }
 }
 
-export default generateTokens
+export default JWTHelper

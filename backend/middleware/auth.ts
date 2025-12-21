@@ -1,33 +1,58 @@
-import { Request, Response, NextFunction } from "express";
-import  jwt, { JwtPayload } from "jsonwebtoken";
+import jwt, { JwtPayload } from 'jsonwebtoken'
+import { Request, Response, NextFunction } from 'express'
+import { UserRole } from '../models/User'
+import JWTHelper from '../util/auth'
 
-const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const header = req.headers.authorization
-        if (!header) {
-            return res.status(401).send({"message": "Unauthorized!"})
+        const refresh_token = req.cookies['refresh_token']
+
+        if (typeof refresh_token !== 'string') return res.status(401).send({ message: 'Invalid token!' })
+
+        const payload: JwtPayload | string = jwt.verify(refresh_token, process.env.REFRESH_TOKEN_SECRET!)
+
+        if (typeof payload === 'string') {
+            return res.status(401).send({ message: 'Unauthorized: ' + payload })
         }
 
-        const token = header.split(" ")[1]
-
-        if (!token) {
-            return res.status(401).send({"message": "Missing header"})
+        // Check user role from payload
+        switch (payload.role) {
+            case UserRole.ADMIN:
+                next()
+                break
+            case UserRole.EMPLOYEE:
+                next()
+                break
+            case UserRole.USER:
+                next()
+                break
+            default:
+                return res.status(403).send({ message: 'Forbidden: Insufficient role permissions' })
         }
 
-        const payload: JwtPayload | string = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET!)
-
-        if (typeof payload === "string") {
-            return res.status(401).send({"message": "Unauthorized!"})
-        }
-
-        (req as any).user = payload.sub
-
-        next()
+        return res.status(400).send({ message: 'Error in authMiddleware?' })
     }
 
-    catch(e) {
-        return res.status(401).send({"message": "Unauthorized!"})
+    catch (e) {
+        res.status(401).send({ message: 'Unauthorized: Missing cookie error: ' + e })
     }
+
 }
 
-export default authMiddleware
+export const adminMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const jwt = req.cookies.refresh_token
+
+        if (typeof jwt !== 'string') return res.status(401).json({ message: 'Missing token', jwt})
+        
+        const jwtHelper = new JWTHelper()
+        const payload: JwtPayload | string = await jwtHelper.verifyToken(jwt)
+
+        if (typeof payload === 'string') return res.status(400).json({message: 'Error decoding!'})
+        if (payload.user_role === 'admin') next()
+        else return res.status(403).json({ message: 'Forbidden: Admins only!' })
+    }
+    catch (e) {
+        return res.status(401).send({ message: 'Unauthorized: ' + e })
+    }
+}

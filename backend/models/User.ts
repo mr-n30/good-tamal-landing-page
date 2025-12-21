@@ -1,6 +1,12 @@
 import { Schema, model, Document } from 'mongoose'
 import bcrypt from "bcrypt"
 
+export enum UserRole {
+    USER = "user",
+    ADMIN = "admin",
+    EMPLOYEE = "employee",
+}
+
 export interface IUser extends Document {
     username: string
     firstName: string
@@ -10,7 +16,7 @@ export interface IUser extends Document {
     dob?: Date
     createdAt: Date
     updatedAt: Date
-    role: "user" | "admin" | "chef" | "employee" | "delivery" | "manager" | "guest"
+    user_role: "user" | "admin" | "employee"
     comparePassword(candidatePassword: string): Promise<boolean>
 }
 
@@ -23,9 +29,9 @@ const UserSchema = new Schema<IUser>({
         dob: { type: Date, required: false },
         createdAt: { type: Date, default: Date.now },
         updatedAt: { type: Date, default: Date.now },
-        role: {
+        user_role: {
             type: String,
-            enum: ["user", "admin", "chef", "employee", "delivery", "manager", "guest"],
+            enum: ["user", "admin", "employee"],
             default: "user",
         },
     }

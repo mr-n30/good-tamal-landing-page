@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express'
 import User from '../models/User'
-import bcrypt from 'bcrypt'
 import validator from 'email-validator'
 import zxcvbn from 'zxcvbn'
-import generateTokens from "../util/auth"
+import JWTHelper from "../util/auth"
+import { authMiddleware } from '../middleware/auth'
 
 const router = Router()
 
@@ -13,6 +13,7 @@ interface RegisterRequestBody {
     firstName?: string
     lastName?: string
     dob?: string
+    username: string
 }
 
 interface LoginRequestBody {
@@ -38,11 +39,12 @@ router.post("/login", async (req: Request, res: Response) => {
         const valid = await user.comparePassword(password)
 
         if (!valid) {
-            return res.status(401).send({message: "Invalid username or password!"})
+            return res.status(401).send({ message: "Invalid username or password!" })
         }
 
-        const {accessToken, refreshToken} = generateTokens(user._id.toString())
-
+        const jwtHelper = new JWTHelper()
+        const refreshToken = await jwtHelper.generateToken(user._id.toString())
+        console.log("Refresh token to set in cookie:", refreshToken)
         res.cookie('refresh_token', refreshToken, {
             maxAge: 7 * 24 * 60 * 60 * 1000,
             sameSite: "strict",
@@ -50,7 +52,7 @@ router.post("/login", async (req: Request, res: Response) => {
             httpOnly: true
         })
 
-        return res.status(200).send({accessToken, user: {id: user._id, username: user.username}})
+        return res.status(200).send({ user: {id: user._id, username: user.username} })
     }
 
     catch (e: any) {
@@ -62,33 +64,36 @@ router.post("/register", async (req: Request, res: Response) => {
     try {
         const user: RegisterRequestBody = req.body
 
-        if (!user.email || !user.password) {
-            return res.status(400).send({ message: "missing required params!" })
+        if (!user.email || !user.password || !user.username) {
+            return res.status(400).send({ message: "Missing required params!" })
         }
 
         // Validate email format
         if (!validator.validate(user.email)) {
-            return res.status(400).send({message: "Invalid email format!"})
+            return res.status(400).send({ message: "Invalid email format!" })
         }
 
         // Check if user already exists
-        const userExists = await User.findOne({ email: user.email })
-        if (userExists) {
-            return res.status(400).send({ message: "User already exists!" })
-        }
+        let emailExists = await User.findOne({ email: user.email })
+        if (emailExists) return res.status(400).send({ message: "User already exists!" })
+
+        // Check if username is taken
+        let usernameExists = await User.findOne({ username: user.username })
+        if (usernameExists) return res.status(400).send({ message: "Username already taken!" })
 
         // Validate password strength
         if (zxcvbn(user.password).score < 3) {
-            return res.status(400).send({message: "Password is not strong enough!"})
+            return res.status(400).send({ message: "Password is not strong enough!" })
         }
 
         const createdUser = await User.insertOne({
             email: user.email,
+            username: user.username,
             password: user.password,
             firstName: user.firstName || "",
             lastName: user.lastName || "",
             dob: user.dob ? new Date(user.dob) : "",
-            role: "user",
+            user_role: "user",
         })
 
         return res.status(200).send(createdUser)
@@ -98,17 +103,5 @@ router.post("/register", async (req: Request, res: Response) => {
         return res.status(500).send({ "message": e.message })
     }
 })
-
-// Future admin route to get all users
-// router.get("/users", async (req: Request, res: Response) => {
-//     try {
-//         const users = await User.find()
-//         return res.status(200).send(users)
-//     }
-
-//     catch (e: any) {
-//         return res.status(500).send({ "message": e.message })
-//     }
-// })
 
 export default router

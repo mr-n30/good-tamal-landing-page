@@ -4,15 +4,22 @@ import cors from 'cors'
 import connectDB from './db'
 import auth from "./routes/auth"
 import menu from "./routes/menu"
+import dashboard from './routes/dashboard'
+import cookieParse from 'cookie-parser'
 
 dotenv.config()
 
 const app = express()
 
 app.use(express.json())
-app.use(cors())
+app.use(cookieParse())
+app.use(cors({
+    origin: ['http://localhost:5173', 'http://localhost:1337'],
+    credentials: true,
+}))
 app.use("/api/auth", auth)
 app.use("/api/menu", menu)
+app.use('/api/admin', dashboard)
 
 const PORT = process.env.PORT
 
