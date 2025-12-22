@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import axios from 'axios'
-import RegisterModal from './RegisterModal'
 
-export default function LoginModal({ setShowLogin }: { setShowLogin: React.Dispatch<React.SetStateAction<boolean>> }) {
+export default function LoginModal({ setShowLogin, showLogin }: {
+    setShowLogin: React.Dispatch<React.SetStateAction<boolean>>,
+    showLogin: boolean
+}) {
+
     interface FormInputData {
         username: string
         password: string
@@ -11,10 +14,6 @@ export default function LoginModal({ setShowLogin }: { setShowLogin: React.Dispa
     interface LoginResponse {
         accessToken?: string
         message?: string
-        user: {
-            id: string
-            username: string
-        }
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -100,11 +99,11 @@ export default function LoginModal({ setShowLogin }: { setShowLogin: React.Dispa
                 <button type='button'>Reset Password</button>
             </div>
 
-            <RegisterModal />
 
             <div className='login-form-close-button'>
                 <button type='button' onClick={() => setShowLogin(false)}>Close</button>
             </div>
         </form>
+
     )
 }

@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import LoginModal from './LoginModal'
+import RegisterModal from './RegisterModal'
+
 // TODO:
 // Use React Router for navigation links?
 // Use redux for cart state management?
@@ -16,7 +18,8 @@ const Nav = () => {
                         alt="Cart icon"
                         onClick={() => console.log('Cart clicked')} /></li>
             </ul>
-            {showLogin && <LoginModal setShowLogin={setShowLogin} />}
+            {showLogin && <LoginModal showLogin={showLogin} setShowLogin={setShowLogin} />}
+            <RegisterModal />
         </nav>
     )
 }
