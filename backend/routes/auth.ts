@@ -10,6 +10,7 @@ const router = Router()
 interface RegisterRequestBody {
     email: string
     password: string
+    confirmPassword?: string
     firstName?: string
     lastName?: string
     dob?: string
@@ -81,6 +82,9 @@ router.post("/register", async (req: Request, res: Response) => {
         let usernameExists = await User.findOne({ username: user.username })
         if (usernameExists) return res.status(400).send({ message: "Username already taken!" })
 
+        // Check if both password match
+        if (user.password !== user.confirmPassword) return res.status(400).json({message: 'Passwords do not match!'})
+
         // Validate password strength
         if (zxcvbn(user.password).score < 3) {
             return res.status(400).send({ message: "Password is not strong enough!" })
@@ -90,13 +94,14 @@ router.post("/register", async (req: Request, res: Response) => {
             email: user.email,
             username: user.username,
             password: user.password,
+            confirmPassword: user.password,
             firstName: user.firstName || "",
             lastName: user.lastName || "",
             dob: user.dob ? new Date(user.dob) : "",
             user_role: "user",
         })
 
-        return res.status(200).send(createdUser)
+        return res.status(200).json({message: 'success', createdUser})
     }
 
     catch (e: any) {
