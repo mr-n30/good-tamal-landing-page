@@ -43,22 +43,27 @@ nav {
     pr-10
 }
 
+.login-form-heading {
+    @apply
+    text-3xl
+    font-bold
+}
+
 .login-form {
     @apply
-    bg-linear-to-r/hsl
-    from-gray-900/97
-    to-gray-900/95
-    fixed
-    w-2xl
-    h-150
-    inset-0
-    m-auto
     flex
     flex-col
     justify-center
     items-center
+    shadow-2xl
     gap-5
-    rounded-2xl
+    w-xl
+    h-150 
+    fixed
+    m-auto
+    inset-0
+    bg-black/90
+    rounded-3xl
 }
 
 .login-form-close-button {
@@ -95,7 +100,8 @@ nav {
     flex
     justify-center
     items-center
-    gap-5
+    gap-10
+    mt-5
 }
 
 .login-form-button-container button {
@@ -111,17 +117,45 @@ nav {
     flex-col
     justify-center
     items-center
+    shadow-2xl
     gap-5
+    w-xl
+    h-150 
+    fixed
+    m-auto
+    inset-0
+    bg-black/90
+    rounded-3xl
+}
+
+.register-form-close-button {
+    @apply
+    absolute
+    right-8
+    top-5
+    text-lg
+    underline
+    font-bold
 }
 
 .register-form-input {
     @apply
-    outline-1
     rounded-sm
-    w-full
+    w-md
     p-2
     text-black
     bg-white
+    shadow-md
+    mt-2
+}
+
+.register-form-button {
+    @apply
+    outline-1
+    p-5
+    rounded-lg
+    mt-5
+    font-bold
 }
 
 .login-form-div label {

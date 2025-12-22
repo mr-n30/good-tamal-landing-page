@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import axios from 'axios'
+import { type AuthModal } from './Nav'
 
-export default function LoginModal({ setShowLogin, showLogin }: {
-    setShowLogin: React.Dispatch<React.SetStateAction<boolean>>,
-    showLogin: boolean
+export default function LoginModal({ setHandleModal }: {
+    setHandleModal: React.Dispatch<React.SetStateAction<AuthModal>>,
 }) {
 
     interface FormInputData {
@@ -16,53 +16,30 @@ export default function LoginModal({ setShowLogin, showLogin }: {
         message?: string
     }
 
+    // Function to send the login request to the backend
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const testLogin = async () => {
-            interface TestResponse {
-                message: string
-                user: {
-                    id: string
-                    username: string
-                }
-            }
 
-            const response = await axios.get<TestResponse>('/api/auth/test', {
-                withCredentials: true
-            })
-
-            console.log('Test login response:', response.data)
-
-            return response.data
-        }
-
+        // Send the login request
         try {
             const res = await axios.post<LoginResponse>('/api/auth/login', {
-                username: formValue.username,
-                password: formValue.password
+                username: formValue.username, password: formValue.password
             })
 
-            if (res.data.message) {
-                alert(res.data.message)
-                return
-            }
-
-            if (res.data.accessToken) {
-                alert('login successful')
-                testLogin()
-                return res.data
-            }
-
+            if (res.data?.message === 'success') alert('Login success!')
+            else alert('Login failed!')
         } catch (error) {
             console.error('Login error:', error)
         }
     }
 
+    // State to set and handle form input element values 
     const [formValue, setFormValue] = useState<FormInputData>({
         username: '',
         password: ''
     })
 
+    // This function sets and handle form input element values 
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.currentTarget
         setFormValue({ ...formValue, [name]: value })
@@ -70,6 +47,7 @@ export default function LoginModal({ setShowLogin, showLogin }: {
 
     return (
         <form className='login-form' onSubmit={handleSubmit}>
+            <h2 className='login-form-heading'>Login</h2>
             <div className='username-container login-form-div'>
                 <label htmlFor='username'>Username:</label>
                 <input
@@ -95,13 +73,18 @@ export default function LoginModal({ setShowLogin, showLogin }: {
                     required maxLength={30} />
             </div>
             <div className='login-form-button-container'>
-                <button type='submit'>Login</button>
+                <button className='login-form-login-button' type='submit'>Login</button>
                 <button type='button'>Reset Password</button>
             </div>
-
-
+            <div className='login-form-register-container'>
+                <p>Don't have an account?</p>
+                <button
+                onClick={() => setHandleModal('register')}
+                type='button'
+                className='login-form-register-button'>Create account</button>
+            </div>
             <div className='login-form-close-button'>
-                <button type='button' onClick={() => setShowLogin(false)}>Close</button>
+                <button type='button' onClick={() => setHandleModal(null)}>Close</button>
             </div>
         </form>
 

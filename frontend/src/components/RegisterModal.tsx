@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios'
+import { type AuthModal } from './Nav'
 
-export default function RegisterModal() {
+export default function RegisterModal({ setHandleModal }: { setHandleModal: React.Dispatch<AuthModal> }) {
     interface formData {
         email?: string
         username?: string
@@ -9,39 +10,33 @@ export default function RegisterModal() {
         confirmPassword?: string
     }
 
-    const [openModal, setOpenModal] = useState<boolean>(false)
     const [formValue, setFormValue] = useState<formData>()
 
+    // Function to handle the input changes
     const handleInput = (e: React.InputEvent<HTMLInputElement>) => {
         e.preventDefault()
         const { name, value } = e.currentTarget
         setFormValue({ ...formValue, [name]: value })
     }
 
-    const handleClose = () => {
-        setOpenModal(!openModal)
-    }
-
-    const handleOpen = () => {
-        setOpenModal(!openModal)
-    }
-
-    const createAccountButton = async (e: React.FormEvent<InputEvent>) => {
+    // Function that send the register request to the backend
+    const createAccount = async (e: React.FormEvent<InputEvent>) => {
         e.preventDefault()
         const email = formValue?.email
         const username = formValue?.username
         const password = formValue?.password
         const confirmPassword = formValue?.confirmPassword
 
+        // Check if password match
         if (password !== confirmPassword) {
             alert('Passwords do not match!') // this needs to be checked in the backend too (client side can be bypassed easily)
             return
         }
 
-        // Send the register request
         const loginRequest = { email, username, password, confirmPassword }
 
         try {
+            // Send the register request
             const res = await axios.post('/api/auth/register', loginRequest)
 
             if (res.data.message === 'success') {
@@ -52,9 +47,7 @@ export default function RegisterModal() {
                 alert(`Registration failed: ${res.data.message}`)
                 return
             }
-        }
-
-        catch (e: any) {
+        } catch (e: any) {
             if (e.response && e.response.data && e.response.data.message) {
                 alert(`Registration failed: ${e.response.data.message}`)
             }
@@ -64,9 +57,9 @@ export default function RegisterModal() {
         }
     }
 
-    const registerForm = (
+    return (
         <form className={'register-form'}>
-            <button type='button' onClick={handleClose}>Close</button>
+            <button className='register-form-close-button' type='button' onClick={() => setHandleModal(null)}>Close</button>
             <h2>Create an account</h2>
             <div className='register-form-username-container register-form-div'>
                 <div className='register-label'>
@@ -120,19 +113,10 @@ export default function RegisterModal() {
                     name='confirmPassword'
                     required />
             </div>
-            <button type='submit' onClick={(e: any) => createAccountButton(e)}>Create account</button>
+            <button
+                className='register-form-button'
+                type='submit'
+                onClick={(e: any) => createAccount(e)}>Create account</button>
         </form>
-    )
-
-    // <div className='login-form-register-container'>
-    //     <p>Don't have an account?</p>
-    //     <button
-    //         type='button'
-    //         className='login-form-register-button'
-    //         onClick={handleOpen}>Register Now</button>
-    //     {openModal && registerForm}
-    // </div>
-    return (
-        registerForm
     )
 }
