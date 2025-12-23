@@ -12,7 +12,7 @@ export default function Footer() {
         // This will be submitted to a backend later
         // where the admin or employee can view the emails / orders collected
         // For now we open a modal or alert
-        alert('Form submitted')
+        alert('Email subsribed!')
     }
 
     return (

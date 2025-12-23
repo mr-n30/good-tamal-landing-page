@@ -6,11 +6,11 @@ import auth from "./routes/auth"
 import menu from "./routes/menu"
 import dashboard from './routes/dashboard'
 import cookieParse from 'cookie-parser'
+import order from './routes/order'
 
 dotenv.config()
 
 const app = express()
-
 app.use(express.json())
 app.use(cookieParse())
 app.use(cors({
@@ -20,9 +20,9 @@ app.use(cors({
 app.use("/api/auth", auth)
 app.use("/api/menu", menu)
 app.use('/api/admin', dashboard)
+app.use('/', order)
 
 const PORT = process.env.PORT
-
 app.listen(PORT, async () => {
     await connectDB()
     console.log(`[+] Server started on port: ${PORT}`)

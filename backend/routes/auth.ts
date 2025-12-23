@@ -53,7 +53,7 @@ router.post("/login", async (req: Request, res: Response) => {
             httpOnly: true
         })
 
-        return res.status(200).send({ user: {id: user._id, username: user.username} })
+        return res.send({ user: {id: user._id, username: user.username} })
     }
 
     catch (e: any) {
@@ -90,6 +90,7 @@ router.post("/register", async (req: Request, res: Response) => {
             return res.status(400).send({ message: "Password is not strong enough!" })
         }
 
+        // Register user
         const createdUser = await User.insertOne({
             email: user.email,
             username: user.username,
@@ -101,11 +102,11 @@ router.post("/register", async (req: Request, res: Response) => {
             user_role: "user",
         })
 
-        return res.status(200).json({message: 'success', createdUser})
+        return res.json({message: 'success', createdUser})
     }
 
     catch (e: any) {
-        return res.status(500).send({ "message": e.message })
+        return res.status(500).json({ "message": e.message })
     }
 })
 
