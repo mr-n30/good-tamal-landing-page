@@ -10,6 +10,7 @@ A product landing page created for the [freeCodeCamp](https://www.freecodecamp.o
 
 # Installation Steps
 ```
+# Clone the repo
 git clone https://github.com/mr-n30/good-tamal-landing-page.git
 
 # Install front end
@@ -21,3 +22,8 @@ cd good-tamal-landing-page/backend && npm i && npm run dev
 
 # Screenshots
 <img width="2168" height="1401" alt="Screenshot 2025-12-27 at 15 16 25" src="https://github.com/user-attachments/assets/c5e5e665-bbbf-4a7d-a7d0-4f76cb74031d" />
+
+# TODO:
+- Finish the create order functionality (Check for xss etc.)
+- Add admin panel and user roles to view orders (Check for xss etc.)
+- Polish the front end
