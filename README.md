@@ -2,10 +2,11 @@
 A product landing page created for the [freeCodeCamp](https://www.freecodecamp.org/learn/2022/responsive-web-design/build-a-product-landing-page-project/build-a-product-landing-page) responsive web design certificate project
 
 # Live Front end Demo
-[good-tamal-landing-page](https://mr-n30.github.io/good-tamal-landing-page/)
-
 > [!NOTE]
 > You need to set up the database for the the login and images to work. Backend and front end still need tweaks and polishing...
+> 
+[https://mr-n30.github.io/good-tamal-landing-page/](https://mr-n30.github.io/good-tamal-landing-page/)
+
 
 # Installation Steps
 ```
