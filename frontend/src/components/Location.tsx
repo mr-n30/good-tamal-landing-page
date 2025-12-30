@@ -52,7 +52,7 @@ export default function Location() {
                 <article className="address styles-for-location-and-hours">
                     <div className="address-heading">
                         <div className="map-icon"></div>
-                        <h2>Location</h2>
+                        <h2 className='address-location-heading'>Location</h2>
                     </div>
                     <p>{locationInfo.street}</p>
                     <p>{locationInfo.city} {locationInfo.locationState} {locationInfo.zip}</p>
@@ -62,7 +62,7 @@ export default function Location() {
                 <article className="hours styles-for-location-and-hours">
                     <div className="hours-heading">
                         <div className="clock-icon"></div>
-                        <h2>Hours</h2>
+                        <h2 className='hours-heading'>Hours</h2>
                     </div>
                     {
                         locationInfo.hours.map((elem: any, index: number) => (

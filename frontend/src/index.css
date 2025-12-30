@@ -566,6 +566,9 @@ nav {
 
 .review {
     @apply
+    transition-transform
+    duration-300
+    hover:scale-110
     inset-1
     shadow-2xl
     w-md
@@ -622,6 +625,7 @@ nav {
     flex-col
     justify-center
     items-center
+    gap-5
 }
 
 .review-section-heading h1 {
@@ -631,7 +635,7 @@ nav {
 
 .review-section-heading p {
     @apply
-    text-lg
+    text-xl
 }
 
 /* Location Section */
@@ -673,6 +677,14 @@ nav {
     gap-10
 }
 
+.hours-heading,
+.address-location-heading {
+    @apply
+    text-xl
+    font-bold
+    underline
+}
+
 .hours {
     @apply
     w-full
@@ -692,6 +704,9 @@ nav {
     to-red-200
     shadow-lg
     rounded-xl
+    transition-transform
+    duration-200
+    hover:scale-105
 }
 
 .map {
@@ -703,6 +718,9 @@ nav {
     justify-center
     items-center
     shadow-2xl
+    transition-transform
+    duration-100
+    hover:scale-95
 }
 
 .map iframe {
