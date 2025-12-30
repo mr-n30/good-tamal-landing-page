@@ -50,8 +50,10 @@ const SignatureDishes = () => {
 
     return (
         <section className="signature-dishes">
-            <h1 id="menu">Our Signature Tamales</h1>
-            <p>Each tamal is handcrafted with love using authentic recipes and the finest ingredients</p>
+            <div className='dish-heading-group'>
+                <h1 id="menu">Our Signature Tamales</h1>
+                <p>Each tamal is handcrafted with love using authentic recipes and the finest ingredients</p>
+            </div>
             <div className="dish-list">
                 {dishes}
             </div>

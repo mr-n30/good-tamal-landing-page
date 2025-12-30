@@ -1,6 +1,6 @@
 @import "tailwindcss";
 * {
-    @apply m-0 p-0 box-border; /*border-green-500 border-dotted border-2*/
+    @apply m-0 p-0 box-border;
 }
 
 html, body {
@@ -22,6 +22,7 @@ html, body {
 /* Navbar Section */
 nav {
     @apply
+    z-50
     w-full
     h-20
     fixed
@@ -30,6 +31,38 @@ nav {
     right-0
     bg-black/70
     text-white
+    flex
+    justify-center
+    items-center
+}
+
+.company-logo {
+    @apply
+    w-8
+    h-8
+    cursor-pointer
+}
+
+.nav-logo {
+    @apply
+    w-8
+    h-8
+    cursor-pointer
+    ml-10
+    w-10
+    h-10
+    transition-transform
+    hover:scale-140
+}
+
+.nav-container {
+    @apply
+    h-full
+    w-5xl
+    m-auto
+    flex
+    justify-between
+    items-center;
 }
 
 .nav-links {
@@ -41,6 +74,23 @@ nav {
     items-center
     gap-10
     pr-10
+}
+
+.nav-links li {
+    @apply
+    font-bold
+    transition-transform
+    duration-100
+    hover:scale-120
+}
+
+.nav-logo-container {
+    @apply
+    flex
+    justify-center
+    items-center
+    gap-5
+    w-sm
 }
 
 .login-form-heading {
@@ -349,7 +399,9 @@ nav {
 
 .dish-list {
     @apply
-    grid grid-cols-3 gap-4;
+    grid
+    grid-cols-3
+    gap-10
 }
 
 .dish {
@@ -358,6 +410,26 @@ nav {
     w-sm h-120
     flex flex-col justify-evenly
     shadow-md
+    transition-transform
+    duration-200
+    hover:scale-110
+    pb-5
+}
+
+.dish-heading-group {
+    @apply
+    flex
+    justify-between
+    items-center
+    flex-col
+    gap-5
+    mb-10
+}
+
+.dish-heading-group h1 {
+    @apply
+    text-5xl
+    font-bold
 }
 
 .dish-heading-group {
