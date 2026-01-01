@@ -2,6 +2,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken'
 import User from '../models/User'
 
 class JWTHelper {
+    // Takes in user ID and returns a signed JWT token
     async generateToken(userId: string): Promise<string> {
         const user = await User.findById(userId)
         const userRole = user!.user_role
@@ -17,6 +18,7 @@ class JWTHelper {
         return token
     }
 
+    // Takes in a JWT token and verifies it, returning the decoded payload
     async verifyToken(token: string): Promise<JwtPayload | string> {
         try {
             const decoded = jwt.verify(token, process.env.REFRESH_TOKEN_SECRET!)

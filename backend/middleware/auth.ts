@@ -18,12 +18,8 @@ export const authMiddleware = async (req: Request, res: Response, next: NextFunc
         // Check user role from payload
         switch (payload.role) {
             case UserRole.ADMIN:
-                next()
-                break
             case UserRole.EMPLOYEE:
-                next()
-                break
-            case UserRole.USER:
+            case UserRole.CUSTOMER:
                 next()
                 break
             default:
@@ -43,12 +39,12 @@ export const adminMiddleware = async (req: Request, res: Response, next: NextFun
     try {
         const jwt = req.cookies.refresh_token
 
-        if (typeof jwt !== 'string') return res.status(401).json({ message: 'Missing token', jwt})
-        
+        if (typeof jwt !== 'string') return res.status(401).json({ message: 'Missing token', jwt })
+
         const jwtHelper = new JWTHelper()
         const payload: JwtPayload | string = await jwtHelper.verifyToken(jwt)
 
-        if (typeof payload === 'string') return res.status(400).json({message: 'Error decoding!'})
+        if (typeof payload === 'string') return res.status(400).json({ message: 'Error decoding!' })
         if (payload.user_role === 'admin') next()
         else return res.status(403).json({ message: 'Forbidden: Admins only!' })
     }
